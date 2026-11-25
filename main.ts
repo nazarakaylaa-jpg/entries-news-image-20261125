@@ -261,8 +261,7 @@ function mark(x: number, y: number, s: number, kind: string): void {
   const k = s / 48; // unit
   const mx = x + s / 2;
   const my = y + s / 2;
-  switch (kind) {
-    case 'flame': {
+  if (kind === 'flame') {
       poly(
         [
           [mx, y + 4 * k],
@@ -285,9 +284,7 @@ function mark(x: number, y: number, s: number, kind: string): void {
         ],
         [255, 196, 0],
       );
-      break;
-    }
-    case 'chart': {
+    } else if (kind === 'chart') {
       box(x + 6 * k, y + 26 * k, 7 * k, 14 * k, [39, 174, 96]);
       box(x + 17 * k, y + 18 * k, 7 * k, 22 * k, [39, 174, 96]);
       box(x + 28 * k, y + 8 * k, 7 * k, 32 * k, [39, 174, 96]);
@@ -296,9 +293,7 @@ function mark(x: number, y: number, s: number, kind: string): void {
         [[x + 34 * k, y + 4 * k], [x + 44 * k, y + 8 * k], [x + 36 * k, y + 14 * k]],
         [26, 26, 26],
       );
-      break;
-    }
-    case 'missile': {
+    } else if (kind === 'missile') {
       poly(
         [
           [mx, y + 4 * k],
@@ -333,24 +328,18 @@ function mark(x: number, y: number, s: number, kind: string): void {
         ],
         [255, 140, 0],
       );
-      break;
-    }
-    case 'ballot': {
+    } else if (kind === 'ballot') {
       box(x + 8 * k, y + 10 * k, 32 * k, 28 * k, [255, 255, 255]);
       frame(x + 8 * k, y + 10 * k, 32 * k, 28 * k, C.ink);
       seg(x + 14 * k, y + 26 * k, x + 20 * k, y + 32 * k, [39, 174, 96], 3);
       seg(x + 20 * k, y + 32 * k, x + 34 * k, y + 16 * k, [39, 174, 96], 3);
-      break;
-    }
-    case 'court': {
+    } else if (kind === 'court') {
       box(x + 6 * k, y + 38 * k, 36 * k, 4 * k, [150, 110, 60]);
       box(x + 20 * k, y + 12 * k, 8 * k, 26 * k, [150, 110, 60]);
       box(x + 8 * k, y + 8 * k, 32 * k, 5 * k, [150, 110, 60]);
       disc(x + 12 * k, y + 18 * k, 6 * k, [200, 150, 60]);
       disc(x + 36 * k, y + 18 * k, 6 * k, [200, 150, 60]);
-      break;
-    }
-    case 'plane': {
+    } else if (kind === 'plane') {
       poly(
         [
           [x + 4 * k, my],
@@ -363,9 +352,7 @@ function mark(x: number, y: number, s: number, kind: string): void {
         ],
         [70, 110, 170],
       );
-      break;
-    }
-    case 'ship': {
+    } else if (kind === 'ship') {
       poly(
         [
           [x + 6 * k, y + 28 * k],
@@ -385,9 +372,7 @@ function mark(x: number, y: number, s: number, kind: string): void {
         [178, 34, 34],
       );
       seg(x + 2 * k, y + 44 * k, x + 46 * k, y + 44 * k, [46, 134, 193], 2);
-      break;
-    }
-    case 'chess': {
+    } else if (kind === 'chess') {
       for (let r = 0; r < 4; r++) {
         for (let c = 0; c < 4; c++) {
           box(x + 6 * k + c * 9 * k, y + 6 * k + r * 9 * k, 9 * k, 9 * k, (r + c) % 2 ? C.ink : C.white);
@@ -395,16 +380,12 @@ function mark(x: number, y: number, s: number, kind: string): void {
       }
       frame(x + 6 * k, y + 6 * k, 36 * k, 36 * k, C.ink);
       disc(mx, my, 8 * k, [178, 34, 34]);
-      break;
-    }
-    case 'flag': {
+    } else if (kind === 'flag') {
       seg(x + 10 * k, y + 6 * k, x + 10 * k, y + 42 * k, C.ink, 2);
       box(x + 12 * k, y + 8 * k, 28 * k, 18 * k, [46, 134, 193]);
       box(x + 12 * k, y + 8 * k, 28 * k, 6 * k, [178, 34, 34]);
       box(x + 12 * k, y + 20 * k, 28 * k, 6 * k, C.white);
-      break;
-    }
-    case 'shield': {
+    } else if (kind === 'shield') {
       poly(
         [
           [mx, y + 4 * k],
@@ -418,20 +399,14 @@ function mark(x: number, y: number, s: number, kind: string): void {
       );
       seg(mx - 6 * k, my + 2 * k, mx - 1 * k, my + 7 * k, C.white, 3);
       seg(mx - 1 * k, my + 7 * k, mx + 8 * k, my - 6 * k, C.white, 3);
-      break;
-    }
-    case 'warn': {
+    } else if (kind === 'warn') {
       poly([[mx, y + 4 * k], [mx + 19 * k, y + 40 * k], [mx - 19 * k, y + 40 * k]], [255, 196, 0]);
       box(mx - 2 * k, y + 16 * k, 4 * k, 14 * k, C.ink);
       box(mx - 2 * k, y + 33 * k, 4 * k, 4 * k, C.ink);
-      break;
-    }
-    case 'cross': {
+    } else if (kind === 'cross') {
       box(mx - 5 * k, y + 8 * k, 10 * k, 32 * k, [220, 60, 60]);
       box(mx - 14 * k, y + 17 * k, 28 * k, 10 * k, [220, 60, 60]);
-      break;
-    }
-    case 'trophy': {
+    } else if (kind === 'trophy') {
       poly(
         [
           [mx - 10 * k, y + 6 * k],
@@ -445,15 +420,11 @@ function mark(x: number, y: number, s: number, kind: string): void {
       box(mx - 10 * k, y + 32 * k, 20 * k, 5 * k, [212, 175, 55]);
       disc(mx - 13 * k, y + 12 * k, 5 * k, [212, 175, 55]);
       disc(mx + 13 * k, y + 12 * k, 5 * k, [212, 175, 55]);
-      break;
-    }
-    case 'planet': {
+    } else if (kind === 'planet') {
       disc(mx, my, 15 * k, [210, 120, 60]);
       seg(x + 2 * k, my + 8 * k, x + 46 * k, my - 8 * k, [150, 110, 60], 3);
       disc(mx - 5 * k, my - 5 * k, 3 * k, [240, 180, 120]);
-      break;
-    }
-    case 'chip': {
+    } else if (kind === 'chip') {
       box(mx - 12 * k, my - 12 * k, 24 * k, 24 * k, [40, 60, 90]);
       frame(mx - 12 * k, my - 12 * k, 24 * k, 24 * k, C.ink);
       box(mx - 6 * k, my - 6 * k, 12 * k, 12 * k, [120, 200, 255]);
@@ -461,17 +432,13 @@ function mark(x: number, y: number, s: number, kind: string): void {
         seg(mx - 8 * k + i * 8 * k, y + 4 * k, mx - 8 * k + i * 8 * k, y + 12 * k, C.ink, 2);
         seg(mx - 8 * k + i * 8 * k, y + 36 * k, mx - 8 * k + i * 8 * k, y + 44 * k, C.ink, 2);
       }
-      break;
-    }
-    case 'book': {
+    } else if (kind === 'book') {
       box(x + 8 * k, y + 8 * k, 32 * k, 32 * k, [178, 34, 34]);
       box(x + 12 * k, y + 12 * k, 24 * k, 24 * k, C.white);
       seg(x + 16 * k, y + 18 * k, x + 32 * k, y + 18 * k, C.ink, 2);
       seg(x + 16 * k, y + 25 * k, x + 32 * k, y + 25 * k, C.ink, 2);
       seg(x + 16 * k, y + 32 * k, x + 28 * k, y + 32 * k, C.ink, 2);
-      break;
-    }
-    case 'people': {
+    } else if (kind === 'people') {
       disc(mx - 9 * k, my - 8 * k, 7 * k, [46, 134, 193]);
       disc(mx + 9 * k, my - 8 * k, 7 * k, [178, 34, 34]);
       poly(
@@ -492,13 +459,10 @@ function mark(x: number, y: number, s: number, kind: string): void {
         ],
         [178, 34, 34],
       );
-      break;
-    }
-    default: {
+    } else {
       disc(mx, my, 16 * k, [46, 134, 193]);
       put(mx - 6 * k, my - 7 * k, '!', 2, C.white);
     }
-  }
 }
 
 // ------------------------------------------------------------ stories
